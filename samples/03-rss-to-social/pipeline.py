@@ -12,7 +12,9 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
+import time
 import urllib.request
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -31,11 +33,29 @@ class FeedItem:
     published: str = ""
 
 
-def fetch_feed_xml(source: str) -> str:
-    if source.startswith("http"):
-        with urllib.request.urlopen(source, timeout=10) as resp:
-            return resp.read().decode("utf-8", errors="replace")
-    return Path(source).read_text(encoding="utf-8")
+def fetch_feed_xml(source: str, timeout: float = 15.0, retries: int = 2) -> str:
+    if not source.startswith("http"):
+        return Path(source).read_text(encoding="utf-8")
+    last_err: Exception | None = None
+    for attempt in range(1, retries + 2):
+        try:
+            req = urllib.request.Request(
+                source,
+                headers={
+                    "User-Agent": "rss-to-social/1.0 (+https://github.com/SHOW-17/ai-automation-samples)"
+                },
+            )
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return resp.read().decode("utf-8", errors="replace")
+        except Exception as e:
+            last_err = e
+            wait = 2 ** (attempt - 1)
+            print(
+                f"[WARN] フィード取得失敗 (試行 {attempt}/{retries + 1}): {e}. {wait}秒待機",
+                file=sys.stderr,
+            )
+            time.sleep(wait)
+    raise RuntimeError(f"フィード取得失敗: {source} ({last_err})")
 
 
 def _strip_ns(tag: str) -> str:
@@ -77,12 +97,49 @@ class GeneratedPost:
     note_intro: str = ""
 
 
+_HASHTAG_KEYWORDS = {
+    "Claude": "#ClaudeCode",
+    "Python": "#Python",
+    "AI": "#AI",
+    "ChatGPT": "#ChatGPT",
+    "副業": "#副業",
+    "業務自動化": "#業務自動化",
+    "スクレイピング": "#スクレイピング",
+    "RSS": "#RSS",
+    "SEO": "#SEO",
+    "DX": "#DX",
+}
+
+
+def auto_hashtags(text: str, max_tags: int = 3) -> list[str]:
+    """テキストから関連キーワードを拾って#タグを生成（重複排除）."""
+    found: list[str] = []
+    seen: set[str] = set()
+    for kw, tag in _HASHTAG_KEYWORDS.items():
+        if kw in text and tag not in seen:
+            found.append(tag)
+            seen.add(tag)
+            if len(found) >= max_tags:
+                break
+    return found
+
+
+def truncate_to_x(text: str, hashtags: list[str], max_len: int = 140) -> str:
+    """X(Twitter)の文字数制限を考慮して末尾にハッシュタグを足す."""
+    suffix = ("\n" + " ".join(hashtags)) if hashtags else ""
+    available = max_len - len(suffix)
+    if len(text) > available:
+        text = text[: available - 1].rstrip() + "…"
+    return text + suffix
+
+
 class MockBroadcaster:
     """API無しでテンプレートから投稿文を生成（デモ用）."""
 
     def generate(self, item: FeedItem) -> GeneratedPost:
         title = item.title or "（無題）"
-        topic = title.split("—")[0].split("|")[0].strip()[:30]
+        topic = re.split(r"[—|│:：]", title)[0].strip()[:30]
+        tags = auto_hashtags(title + " " + (item.description or ""))
 
         summary = (
             f"{title}に関する記事です。本記事では{topic}の最新動向と実践的な活用法について、"
@@ -90,19 +147,17 @@ class MockBroadcaster:
             f"特に2026年現在のトレンドを押さえる上で参考になる内容です。"
         )
 
-        x_casual = (
-            f"ちょっと面白い記事見つけた👀\n\n"
-            f"「{topic}」って結局どこから始めるのが正解なのか、"
-            f"わかりやすくまとまってる。\n\n{item.link}"
+        x_casual = truncate_to_x(
+            f"ちょっと面白い記事見つけた👀\n「{topic}」って結局どこから始めるのが正解なのか、わかりやすくまとまってる。\n{item.link}",
+            tags,
         )
-        x_formal = (
-            f"【{topic}】に関する記事を読みました。\n"
-            f"実務で押さえておくべきポイントが体系的に整理されており、"
-            f"学びの多い内容でした。\n\n{item.link}"
+        x_formal = truncate_to_x(
+            f"【{topic}】に関する記事を読みました。実務で押さえておくべきポイントが体系的に整理されており、学びの多い内容でした。\n{item.link}",
+            tags,
         )
-        x_question = (
-            f"質問です。{topic}についてみなさんはどう取り組まれていますか？\n\n"
-            f"こちらの記事の整理が参考になりました👇\n{item.link}"
+        x_question = truncate_to_x(
+            f"質問です。{topic}についてみなさんはどう取り組まれていますか？\nこちらの記事の整理が参考になりました👇\n{item.link}",
+            tags,
         )
 
         threads = (

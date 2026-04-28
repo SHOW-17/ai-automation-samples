@@ -12,8 +12,11 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
+import random
 import sys
 import time
+import urllib.error
 import urllib.request
 from dataclasses import dataclass
 from datetime import datetime
@@ -61,10 +64,27 @@ def load_watchlist(path: Path) -> list[WatchTarget]:
 # --------------- 取得とパース ---------------
 
 
-def fetch(url: str, ua: str = "PriceMonitor/1.0 (contact@example.com)") -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": ua})
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        return resp.read().decode("utf-8", errors="replace")
+def fetch(
+    url: str,
+    ua: str = "PriceMonitor/1.0 (+contact@example.com)",
+    timeout: float = 15.0,
+    retries: int = 2,
+) -> str:
+    """指数バックオフ付きでHTML取得. 失敗時は例外を上げる."""
+    last_err: Exception | None = None
+    for attempt in range(1, retries + 2):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": ua})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return resp.read().decode("utf-8", errors="replace")
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError) as e:
+            last_err = e
+            if attempt > retries:
+                break
+            wait = 2 ** (attempt - 1) + random.uniform(0, 0.5)
+            print(f"    [retry] {e} → {wait:.1f}秒待機して再試行", file=sys.stderr)
+            time.sleep(wait)
+    raise RuntimeError(f"取得失敗 ({last_err}): {url}")
 
 
 def extract_with_bs(html: str, selector: str) -> str | None:
@@ -243,7 +263,12 @@ new Chart(document.getElementById('chart'), {{
 # --------------- メインフロー ---------------
 
 
-def run_monitoring(watchlist_path: Path, request_delay: float = 1.0) -> None:
+def run_monitoring(
+    watchlist_path: Path,
+    request_delay: float = 1.0,
+    delay_jitter: float = 0.5,
+    notify_slack: bool = False,
+) -> None:
     targets = load_watchlist(watchlist_path)
     print(f"[INFO] {len(targets)}件を監視", file=sys.stderr)
 
@@ -273,7 +298,9 @@ def run_monitoring(watchlist_path: Path, request_delay: float = 1.0) -> None:
         except Exception as e:
             print(f"  [ERR] {t.name}: {e}", file=sys.stderr)
             current[t.name] = None
-        time.sleep(request_delay)
+        # ジッター付きの待機（ボット対策・サーバ配慮）
+        if request_delay > 0:
+            time.sleep(request_delay + random.uniform(0, delay_jitter))
 
     append_history(new_records)
     history = load_history()
@@ -285,20 +312,59 @@ def run_monitoring(watchlist_path: Path, request_delay: float = 1.0) -> None:
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     REPORT_PATH.write_text(render_report(targets, history, alerts), encoding="utf-8")
 
+    if notify_slack and alerts:
+        webhook = os.environ.get("SLACK_WEBHOOK_URL")
+        if webhook:
+            post_to_slack(webhook, alerts)
+        else:
+            print("[INFO] SLACK_WEBHOOK_URL未設定のため通知スキップ", file=sys.stderr)
+
     print(f"[OK] {len(alerts)}件のアラート / レポート: {REPORT_PATH}")
+
+
+def post_to_slack(webhook_url: str, alerts: list[dict]) -> None:
+    """Slack Incoming Webhook にアラートを送信."""
+    blocks = ["*📈 価格モニタリング・アラート*"]
+    for a in alerts:
+        arrow = "⬆️" if a["direction"] == "up" else "⬇️"
+        blocks.append(
+            f"{arrow} *{a['name']}*  ¥{a['previous']:,} → ¥{a['current']:,} "
+            f"({a['diff_pct']:+.2f}%)\n  <{a['url']}|詳細を見る>"
+        )
+    payload = json.dumps({"text": "\n\n".join(blocks)}).encode("utf-8")
+    req = urllib.request.Request(
+        webhook_url,
+        data=payload,
+        headers={"Content-Type": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            if resp.status >= 300:
+                print(f"[WARN] Slack通知失敗: HTTP {resp.status}", file=sys.stderr)
+            else:
+                print(f"[OK] Slackに{len(alerts)}件通知")
+    except Exception as e:
+        print(f"[WARN] Slack通知失敗: {e}", file=sys.stderr)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--watchlist", default=str(DEFAULT_WATCHLIST))
     parser.add_argument("--demo", action="store_true", help="サンプル履歴を流し込んでE2Eデモ")
-    parser.add_argument("--delay", type=float, default=1.0)
+    parser.add_argument("--delay", type=float, default=1.0, help="リクエスト間隔の基準秒数")
+    parser.add_argument("--jitter", type=float, default=0.5, help="待機にランダム加算する秒数")
+    parser.add_argument("--slack", action="store_true", help="アラートをSlackに通知 (SLACK_WEBHOOK_URLが必要)")
     args = parser.parse_args()
 
     if args.demo:
         seed_demo_history()
 
-    run_monitoring(Path(args.watchlist), request_delay=args.delay)
+    run_monitoring(
+        Path(args.watchlist),
+        request_delay=args.delay,
+        delay_jitter=args.jitter,
+        notify_slack=args.slack,
+    )
 
 
 def seed_demo_history() -> None:

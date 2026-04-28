@@ -29,6 +29,8 @@ ChatGPTに「記事を書いて」と一発で頼むのとの違い:
 
 ## 使い方
 
+### 単発生成
+
 ```bash
 # モック生成（APIキー不要、デモ用）
 python generate.py --keyword "Claude Codeで業務自動化" --mock
@@ -37,10 +39,41 @@ python generate.py --keyword "Claude Codeで業務自動化" --mock
 export ANTHROPIC_API_KEY=sk-ant-...
 python generate.py --keyword "Claude Codeで業務自動化"
 
-# 出力先指定
+# 出力形式指定
 python generate.py --keyword "..." --output article.md --format markdown
 python generate.py --keyword "..." --output article.html --format html
+python generate.py --keyword "..." --format json   # 構造化データとして
 ```
+
+### 一括生成（CSVから複数キーワード）
+
+```bash
+# sample_keywords.csv に書かれたキーワードを順次処理
+python bulk_generate.py --keywords sample_keywords.csv --mock --limit 3
+
+# 本番生成、API呼び出し間に2秒待機
+python bulk_generate.py --keywords sample_keywords.csv --delay 2.0
+```
+
+`bulk_output/_summary.csv` に処理結果のサマリが残ります。
+
+### WordPress自動投稿（オプション）
+
+```bash
+# ドライラン（環境変数なしで動作確認）
+python wp_post.py --markdown sample_outputs/claude-code-automation.md --dry-run
+
+# 実投稿（draft）
+export WP_BASE_URL=https://your-site.example.com
+export WP_USERNAME=admin
+export WP_APP_PASSWORD=xxxx-xxxx-xxxx-xxxx
+python wp_post.py --markdown article.md --status draft
+
+# 公開ステータスで投稿
+python wp_post.py --markdown article.md --status publish
+```
+
+WordPressの「アプリケーションパスワード」は管理画面のユーザープロフィール末尾から取得できます。
 
 ## サンプル出力
 

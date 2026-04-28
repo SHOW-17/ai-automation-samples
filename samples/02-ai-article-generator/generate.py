@@ -85,23 +85,38 @@ class MockGenerator:
         ]
         return title, sections
 
+    # H3用の本文バリエーション（モック品質向上のため複数パターンをローテーション）
+    _BODY_PATTERNS = [
+        "{h3}を考えるうえで重要なのは、{keyword}の本質を理解したうえで現実の制約と向き合うことです。"
+        "多くの人が陥りがちなのは、ツールの選定にばかり時間をかけて本来の目的を見失うパターンです。",
+        "{h3}は{keyword}に取り組むうえで欠かせない観点です。"
+        "とくに業務に組み込む際は、技術的な面白さよりも「結果として何分の手作業が減るか」を基準に判断するとブレません。",
+        "実務における{h3}は、教科書的な理論より現場での試行錯誤が物を言う領域です。"
+        "{keyword}の文脈では、小さな単位で実験し、数値で効果を測り、ダメだったら捨てるという軽さが求められます。",
+        "{h3}に関しては、「いきなり全社展開」ではなく「自分の業務だけでまず1週間動かす」がベストプラクティスです。"
+        "{keyword}の取り組みは、信用残高を貯めながら拡張していくのが定石になります。",
+    ]
+    _ACTION_PATTERNS = [
+        "具体的なアクションとしては、まず小さく始めて、結果を計測し、改善のサイクルを回すことが基本になります。"
+        "特に{keyword}のような領域では、最初から完璧を目指すより、70%の完成度で動かしながら学ぶ方が早く成果が出ます。",
+        "現場で再現するなら、まず週に1回30分、{keyword}に関する「実験タスク」を時間割に組み込むことから始めましょう。"
+        "決まった時間にやることで、習慣化しやすく、属人化も防げます。",
+        "次のステップに進む判断材料は「本当に時間が浮いたか」だけで十分です。"
+        "{keyword}のために投じた時間と、削減できた手作業時間を月次で記録するシートを作っておくと、上司への説明にも使えます。",
+    ]
+
     def section_body(self, keyword: str, section: Section) -> str:
-        bodies: list[str] = []
-        bodies.append(
+        bodies: list[str] = [
             f"このセクションでは「{section.h2}」というテーマで、{keyword}に取り組む際の実践的なポイントを解説します。"
             f"単なる概念の説明ではなく、現場で使える具体的なアプローチを中心にまとめています。"
-        )
-        for i, h3 in enumerate(section.h3_list, 1):
+        ]
+        for i, h3 in enumerate(section.h3_list):
             bodies.append(f"\n### {h3}\n")
-            bodies.append(
-                f"{h3}を考えるうえで重要なのは、{keyword}の本質を理解したうえで現実の制約と向き合うことです。"
-                f"多くの人が陥りがちなのは、ツールの選定にばかり時間をかけて、本来の目的を見失ってしまうパターンです。"
-            )
-            bodies.append(
-                f"具体的なアクションとしては、まず小さく始めて、結果を計測し、改善のサイクルを回すことが基本になります。"
-                f"特に{keyword}のような領域では、最初から完璧を目指すより、70%の完成度で動かしながら学ぶ方が早く成果が出ます。"
-            )
-            if i == len(section.h3_list):
+            bp = self._BODY_PATTERNS[i % len(self._BODY_PATTERNS)]
+            ap = self._ACTION_PATTERNS[i % len(self._ACTION_PATTERNS)]
+            bodies.append(bp.format(h3=h3, keyword=keyword))
+            bodies.append(ap.format(h3=h3, keyword=keyword))
+            if i == len(section.h3_list) - 1:
                 bodies.append(
                     f"このプロセスを繰り返すことで、{keyword}に関するノウハウが蓄積され、より高度な活用へとつながっていきます。"
                 )

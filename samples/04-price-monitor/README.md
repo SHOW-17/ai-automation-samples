@@ -34,12 +34,26 @@
 # 初回実行（履歴ファイルが作られる）
 python monitor.py
 
-# サンプルデータでデモ実行（ローカルHTMLをスクレイプ）
-python monitor.py --watchlist sample_data/watchlist.csv
+# サンプルデータでデモ実行（ローカルHTMLをスクレイプ + 30日履歴）
+python monitor.py --demo --delay 0 --jitter 0
+
+# 待機時間の調整（推奨1秒以上 + ジッター）
+python monitor.py --delay 2 --jitter 1.5
+
+# Slack通知をONにする
+export SLACK_WEBHOOK_URL=https://hooks.slack.com/services/XXX/YYY/ZZZ
+python monitor.py --slack
 
 # レポート閲覧
 open output/report.html
 ```
+
+**実装済みの実運用機能**:
+- 取得失敗時の指数バックオフリトライ（最大3回）
+- リクエスト間隔のランダムジッター（ボット対策）
+- 価格変動の閾値アラート
+- Slack Incoming Webhook 通知
+- 履歴CSV追記（重複削除はユーザー側で）
 
 ## 入力: watchlist.csv
 

@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>佐藤社労士事務所｜中小企業の労務管理を、現実的に支える。</title>
+<meta name="description" content="社会保険労務士・佐藤事務所。中小企業の労務管理・就業規則・助成金申請をワンストップでサポート。初回相談無料。">
+<meta property="og:title" content="佐藤社労士事務所">
+<meta property="og:description" content="中小企業の労務をワンストップで支える社労士事務所">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1e40af">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "佐藤社労士事務所",
+  "description": "中小企業向け社労士事務所",
+  "areaServed": "東京都",
+  "priceRange": "¥¥¥"
+}
+</script>
+
+<style>
+:root {
+  --accent: #1e40af;
+  --accent-dark: #1e3a8a;
+  --accent-light: #dbeafe;
+  --bg: #ffffff;
+  --bg-alt: #f8fafc;
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #e2e8f0;
+  --max: 1080px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.85;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+section { padding: 80px 0; }
+h2 {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 12px;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.lead { text-align: center; color: var(--muted); margin-bottom: 56px; font-size: 15px; }
+
+/* HEADER */
+header {
+  position: sticky; top: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  z-index: 100; padding: 16px 0;
+}
+header .nav { display: flex; justify-content: space-between; align-items: center; }
+header .logo { font-size: 18px; font-weight: 700; color: var(--accent-dark); }
+header nav ul { display: flex; gap: 28px; list-style: none; align-items: center; }
+header nav a {
+  text-decoration: none; color: var(--ink); font-size: 14px; font-weight: 500;
+}
+header nav a:hover { color: var(--accent); }
+header .nav-cta {
+  padding: 10px 20px; background: var(--accent); color: white;
+  border-radius: 6px; font-size: 13px; font-weight: 700;
+}
+header .nav-cta:hover { background: var(--accent-dark); }
+@media (max-width: 720px) { header nav ul li:not(:last-child) { display: none; } }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--accent-light) 0%, white 100%);
+  padding: 100px 0 80px;
+  text-align: center;
+}
+.hero-tag {
+  display: inline-block;
+  background: white;
+  color: var(--accent-dark);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 13px; font-weight: 600;
+  margin-bottom: 24px;
+  border: 1px solid var(--accent);
+}
+.hero h1 {
+  font-size: clamp(28px, 4.5vw, 48px);
+  font-weight: 800;
+  line-height: 1.4;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+.hero h1 strong { color: var(--accent-dark); }
+.hero p { font-size: 17px; color: var(--muted); max-width: 600px; margin: 0 auto 40px; }
+.btn {
+  display: inline-block;
+  padding: 16px 36px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  transition: all 0.2s;
+  margin: 0 8px 12px;
+}
+.btn:hover { background: var(--accent-dark); transform: translateY(-2px); }
+.btn.outline { background: transparent; color: var(--accent-dark); border: 2px solid var(--accent); }
+.btn.outline:hover { background: var(--accent-light); }
+
+/* TRUST INDICATORS */
+.trust {
+  background: white;
+  padding: 60px 0;
+  border-top: 1px solid var(--line);
+}
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  text-align: center;
+}
+.trust-item .number {
+  font-size: 40px; font-weight: 800;
+  color: var(--accent-dark);
+  display: block;
+  margin-bottom: 4px;
+}
+.trust-item .label {
+  font-size: 13px; color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* SERVICES */
+.services { background: var(--bg-alt); }
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.svc-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 32px 28px;
+  transition: all 0.2s;
+}
+.svc-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(30, 64, 175, 0.08); }
+.svc-card .icon {
+  display: inline-block;
+  width: 48px; height: 48px;
+  background: var(--accent-light);
+  border-radius: 12px;
+  display: grid; place-items: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.svc-card h3 { font-size: 18px; margin-bottom: 12px; font-weight: 700; }
+.svc-card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+/* PROCESS */
+.process-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  position: relative;
+}
+.process-item {
+  text-align: center;
+  padding: 28px 20px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+.process-item .num {
+  display: inline-grid; place-items: center;
+  width: 48px; height: 48px;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+.process-item h4 { margin-bottom: 8px; }
+.process-item p { font-size: 13px; color: var(--muted); }
+
+/* TESTIMONIALS */
+.testi { background: var(--bg-alt); }
+.testi-list { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.testi-card {
+  background: white;
+  padding: 28px;
+  border-radius: 12px;
+  border-left: 4px solid var(--accent);
+}
+.testi-card p { color: var(--ink); font-size: 14px; margin-bottom: 16px; }
+.testi-card .author { font-size: 13px; color: var(--muted); }
+
+/* FAQ */
+.faq-list { max-width: 720px; margin: 0 auto; }
+details {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 0;
+}
+details summary {
+  padding: 20px 24px;
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  position: relative;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::after {
+  content: "+";
+  position: absolute; right: 24px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px; color: var(--accent);
+  transition: transform 0.2s;
+}
+details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+details p { padding: 0 24px 20px; color: var(--muted); font-size: 14px; }
+
+/* CTA */
+.cta-final { background: var(--accent); color: white; text-align: center; }
+.cta-final h2 { color: white; }
+.cta-final p { color: rgba(255,255,255,0.9); margin-bottom: 32px; }
+.cta-final .btn { background: white; color: var(--accent-dark); }
+.cta-final .btn:hover { background: var(--bg-alt); }
+
+/* FORM */
+form { max-width: 560px; margin: 0 auto; }
+.form-row { margin-bottom: 20px; }
+.form-row label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.form-row input, .form-row textarea {
+  width: 100%; padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 15px; font-family: inherit;
+  background: var(--bg-alt);
+}
+.form-row input:focus, .form-row textarea:focus {
+  outline: 2px solid var(--accent);
+  background: white;
+}
+.form-row textarea { min-height: 120px; resize: vertical; }
+
+footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.7);
+  padding: 40px 24px;
+  text-align: center;
+  font-size: 13px;
+}
+footer a { color: white; text-decoration: none; margin: 0 8px; }
+
+.reveal { opacity: 0; transform: translateY(16px); transition: all 0.6s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">佐藤社労士事務所</div>
+    <nav>
+      <ul>
+        <li><a href="#services">業務内容</a></li>
+        <li><a href="#process">流れ</a></li>
+        <li><a href="#testi">お客様の声</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><a href="#contact" class="nav-cta">無料相談</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="hero-tag">中小企業の労務管理 専門</span>
+    <h1>労務管理を、<strong>現実的に</strong>。<br>本業に集中できる体制づくりを。</h1>
+    <p>就業規則の整備、給与計算、助成金申請。中小企業でよく起きる労務の悩みを、実務で解決します。初回相談は60分無料です。</p>
+    <a href="#contact" class="btn">📞 無料相談を予約する</a>
+    <a href="#services" class="btn outline">サービスを見る</a>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="container trust-grid">
+    <div class="trust-item">
+      <span class="number">300+</span>
+      <span class="label">支援した中小企業数</span>
+    </div>
+    <div class="trust-item">
+      <span class="number">15年</span>
+      <span class="label">社労士としての実績</span>
+    </div>
+    <div class="trust-item">
+      <span class="number">98%</span>
+      <span class="label">継続契約率</span>
+    </div>
+    <div class="trust-item">
+      <span class="number">¥3.2億</span>
+      <span class="label">獲得した助成金額</span>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <div class="container">
+    <h2 class="reveal">業務内容</h2>
+    <p class="lead reveal">中小企業の労務を、ワンストップでカバーします</p>
+    <div class="svc-grid">
+      <article class="svc-card reveal">
+        <span class="icon">📋</span>
+        <h3>就業規則の作成・改定</h3>
+        <p>会社の実態に合った就業規則を、トラブルを未然に防ぐ視点で整備。法改正対応も継続でサポートします。</p>
+      </article>
+      <article class="svc-card reveal">
+        <span class="icon">💰</span>
+        <h3>給与計算・社保手続き</h3>
+        <p>毎月の給与計算、賞与計算、社会保険・労働保険の各種手続きを代行。クラウド対応で連携もスムーズ。</p>
+      </article>
+      <article class="svc-card reveal">
+        <span class="icon">🎯</span>
+        <h3>助成金申請サポート</h3>
+        <p>キャリアアップ助成金、雇用調整助成金など、御社が活用できる助成金を診断・申請。報酬は成功報酬制。</p>
+      </article>
+      <article class="svc-card reveal">
+        <span class="icon">🛡️</span>
+        <h3>労務トラブル対応</h3>
+        <p>解雇・退職トラブル、ハラスメント、未払い残業代問題など、起きてしまったトラブルへの実務対応。</p>
+      </article>
+      <article class="svc-card reveal">
+        <span class="icon">👥</span>
+        <h3>人事評価制度の構築</h3>
+        <p>評価項目の設計、運用支援、社員説明会まで。「うまく回る評価制度」を、机上の理論ではなく現場の運用視点で設計。</p>
+      </article>
+      <article class="svc-card reveal">
+        <span class="icon">📚</span>
+        <h3>研修・セミナー</h3>
+        <p>管理職向けハラスメント研修、労務管理基礎研修など。全社員が知っておくべき内容を、わかりやすくお届け。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="container">
+    <h2 class="reveal">ご相談の流れ</h2>
+    <p class="lead reveal">まずは無料相談から。お気軽にどうぞ。</p>
+    <div class="process-list">
+      <div class="process-item reveal">
+        <div class="num">1</div>
+        <h4>お問い合わせ</h4>
+        <p>電話・メール・LINEでお気軽にご連絡ください</p>
+      </div>
+      <div class="process-item reveal">
+        <div class="num">2</div>
+        <h4>無料相談（60分）</h4>
+        <p>御社の状況をお伺いし、課題と方向性を整理</p>
+      </div>
+      <div class="process-item reveal">
+        <div class="num">3</div>
+        <h4>ご提案・お見積り</h4>
+        <p>必要な業務範囲・費用・期間を明示してご提案</p>
+      </div>
+      <div class="process-item reveal">
+        <div class="num">4</div>
+        <h4>ご契約・着手</h4>
+        <p>ご納得いただいてからご契約。すぐに実務に入ります</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="testi" class="testi">
+  <div class="container">
+    <h2 class="reveal">お客様の声</h2>
+    <p class="lead reveal">300社以上の中小企業様にご支持いただいています</p>
+    <div class="testi-list">
+      <div class="testi-card reveal">
+        <p>「就業規則の整備を依頼しましたが、机上の整備ではなく現場の実態を踏まえた内容にしてくださり、とても助かりました。社員からも『前より分かりやすい』と好評です。」</p>
+        <div class="author">— 製造業 / 従業員45名 / 経営者様</div>
+      </div>
+      <div class="testi-card reveal">
+        <p>「助成金は申請が複雑で諦めていましたが、佐藤先生に依頼してから3年で総額1,200万円を獲得。本業のキャッシュフローに直結する効果でした。」</p>
+        <div class="author">— IT業 / 従業員18名 / 取締役様</div>
+      </div>
+      <div class="testi-card reveal">
+        <p>「労務トラブルが起きたときの初動対応を相談できる先生がいることが、経営の安心感につながっています。困ったときにすぐ電話できる関係性が一番の財産です。」</p>
+        <div class="author">— 飲食業 / 従業員30名 / 代表様</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <h2 class="reveal">よくあるご質問</h2>
+    <div class="faq-list">
+      <details class="reveal">
+        <summary>Q. 顧問契約と単発依頼、どちらがいいですか？</summary>
+        <p>従業員10名以上、毎月の手続きが発生する企業様は顧問契約がコスト的にも有利です。10名未満や、単発の課題（就業規則作成のみ等）であれば、スポット依頼でも対応可能です。初回相談時にご提案いたします。</p>
+      </details>
+      <details class="reveal">
+        <summary>Q. 顧問料の相場はどれくらいですか？</summary>
+        <p>従業員数によって変動しますが、月額3万円〜（10名以下）、5万円〜（30名以下）が目安です。給与計算込みかどうかでも変わります。詳しくはお見積もりさせてください。</p>
+      </details>
+      <details class="reveal">
+        <summary>Q. クラウドツール（freee人事労務、SmartHR等）には対応できますか？</summary>
+        <p>はい、freee人事労務、SmartHR、マネーフォワードクラウド給与など、主要なクラウドツールに対応しています。導入支援・運用代行も承ります。</p>
+      </details>
+      <details class="reveal">
+        <summary>Q. すぐにトラブル対応をお願いできますか？</summary>
+        <p>緊急性の高い案件（解雇通知への対応、労基署対応等）は、当日もしくは翌営業日の対応可能な体制を整えています。まずはお電話ください。</p>
+      </details>
+      <details class="reveal">
+        <summary>Q. 顧問契約後、合わなかったら解除できますか？</summary>
+        <p>顧問契約は1年単位ですが、3ヶ月ごとの見直しタイミングを設けています。お互いに「合わない」と感じた場合は、円満に契約解除できます。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-final">
+  <div class="container">
+    <h2 class="reveal">まずは無料相談から</h2>
+    <p class="reveal">60分の初回相談は無料です。電話・オンライン・対面どれでも対応可能。</p>
+    <form class="reveal" action="https://formspree.io/f/EXAMPLE" method="POST">
+      <div class="form-row">
+        <label>お名前 *</label>
+        <input type="text" name="name" required>
+      </div>
+      <div class="form-row">
+        <label>メールアドレス *</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="form-row">
+        <label>会社名・規模</label>
+        <input type="text" name="company" placeholder="例：株式会社ABC / 従業員20名">
+      </div>
+      <div class="form-row">
+        <label>ご相談内容 *</label>
+        <textarea name="message" required placeholder="どんなことでもお気軽にどうぞ"></textarea>
+      </div>
+      <div style="text-align:center;">
+        <button type="submit" class="btn">送信する</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 佐藤社労士事務所</p>
+  <p style="margin-top:12px;">
+    <a href="#">プライバシーポリシー</a>
+    <a href="#">特定商取引法</a>
+    <a href="#">個人情報保護方針</a>
+  </p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

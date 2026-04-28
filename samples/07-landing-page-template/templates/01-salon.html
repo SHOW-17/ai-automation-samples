@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>リラクゼーションサロン Aoi｜心ほどける、ひととき。</title>
+<meta name="description" content="渋谷区内のプライベートサロン Aoi。日々の疲れに寄り添うアロマトリートメントとボディケア。完全予約制・お一人ずつ丁寧に。">
+<meta property="og:title" content="リラクゼーションサロン Aoi">
+<meta property="og:description" content="渋谷区のプライベートサロン。完全予約制で、ひとりひとりに丁寧に向き合います。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#5e7a6c">
+
+<!-- Schema.org 店舗情報 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  "name": "リラクゼーションサロン Aoi",
+  "image": "https://example.com/og-salon.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "渋谷区代々木 1-2-3",
+    "addressLocality": "渋谷区",
+    "addressRegion": "東京都",
+    "postalCode": "151-0053",
+    "addressCountry": "JP"
+  },
+  "telephone": "+81-3-XXXX-XXXX",
+  "openingHours": "Mo,Tu,We,Fr,Sa,Su 10:00-21:00",
+  "priceRange": "¥¥"
+}
+</script>
+
+<style>
+:root {
+  --accent: #5e7a6c;
+  --accent-dark: #3f5648;
+  --bg: #f8f5f0;
+  --bg-alt: #efeae0;
+  --ink: #2d2a26;
+  --muted: #6b6660;
+  --line: #ddd5c8;
+  --max: 960px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "MS Mincho", serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.85;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--accent-dark); }
+
+.container { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+section { padding: 80px 0; }
+section h2 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  margin-bottom: 12px;
+  color: var(--accent-dark);
+}
+section .lead {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 48px;
+}
+
+/* HEADER */
+header {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(248, 245, 240, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  z-index: 100;
+  padding: 16px 0;
+}
+header .nav { display: flex; justify-content: space-between; align-items: center; }
+header .logo { font-size: 18px; letter-spacing: 0.2em; font-weight: 500; }
+header nav ul { display: flex; gap: 24px; list-style: none; }
+header nav a {
+  text-decoration: none; color: var(--ink);
+  font-size: 13px; letter-spacing: 0.1em;
+  transition: color 0.2s;
+}
+header nav a:hover { color: var(--accent); }
+
+/* HERO */
+.hero {
+  height: 100vh; min-height: 560px;
+  display: grid; place-items: center;
+  text-align: center;
+  background-image:
+    linear-gradient(135deg, rgba(94, 122, 108, 0.55), rgba(63, 86, 72, 0.6)),
+    url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding-top: 64px;
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+.hero p { font-size: 16px; letter-spacing: 0.1em; margin-bottom: 40px; }
+.btn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  border-radius: 999px;
+  letter-spacing: 0.15em;
+  font-size: 14px;
+  transition: all 0.3s;
+  border: 1px solid var(--accent);
+}
+.btn:hover { background: var(--accent-dark); transform: translateY(-2px); }
+.btn.outline { background: transparent; border-color: white; }
+.btn.outline:hover { background: white; color: var(--accent-dark); }
+
+/* CONCEPT */
+.concept p {
+  text-align: center;
+  font-size: 17px;
+  max-width: 640px;
+  margin: 0 auto 16px;
+}
+
+/* MENU */
+.menu { background: var(--bg-alt); }
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+.menu-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 32px 28px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+.menu-card:hover { transform: translateY(-4px); }
+.menu-card h3 { font-size: 18px; margin-bottom: 8px; letter-spacing: 0.1em; }
+.menu-card .duration { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
+.menu-card .price {
+  font-size: 24px; color: var(--accent-dark);
+  margin-bottom: 16px; letter-spacing: 0.05em;
+}
+.menu-card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+/* TESTIMONIALS */
+.testi-list {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.testi {
+  background: white;
+  border-left: 3px solid var(--accent);
+  padding: 24px 28px;
+  font-size: 14px;
+}
+.testi .who { color: var(--muted); margin-top: 12px; font-size: 12px; }
+
+/* ACCESS */
+.access { background: var(--bg-alt); }
+.access-info {
+  display: grid; gap: 32px;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .access-info { grid-template-columns: 1fr; }
+}
+.access-info dl { display: grid; grid-template-columns: 80px 1fr; gap: 16px 24px; }
+.access-info dt { font-weight: 600; color: var(--accent-dark); }
+.access-info dd { color: var(--muted); }
+.map-frame {
+  width: 100%; height: 280px;
+  background: #ddd5c8 url('https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=800&q=70') center/cover;
+}
+
+/* CTA */
+.cta-section {
+  background: var(--accent);
+  color: white;
+  text-align: center;
+}
+.cta-section h2 { color: white; }
+.cta-section p { color: rgba(255,255,255,0.9); margin-bottom: 32px; }
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--ink);
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(20px); transition: all 0.8s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">Aoi</div>
+    <nav>
+      <ul>
+        <li><a href="#concept">Concept</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#access">Access</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>心ほどける、ひととき。</h1>
+    <p>渋谷区代々木のプライベートサロン</p>
+    <a href="#contact" class="btn">ご予約はこちら</a>
+  </div>
+</section>
+
+<section id="concept" class="concept">
+  <div class="container">
+    <h2 class="reveal">CONCEPT</h2>
+    <p class="lead reveal">日々を、もうすこし、やさしく。</p>
+    <p class="reveal">
+      「忙しい毎日のなかで、自分のための時間が取れていない」<br>
+      そんなあなたのために、Aoi は完全予約制でお迎えしています。
+    </p>
+    <p class="reveal">
+      アロマと手技で、こわばった身体と心をゆっくりとほぐす。<br>
+      帰り道、空気がすこし違って感じられる。<br>
+      そんな"ささやかな変化"を、丁寧にお届けします。
+    </p>
+  </div>
+</section>
+
+<section id="menu" class="menu">
+  <div class="container">
+    <h2 class="reveal">MENU</h2>
+    <p class="lead reveal">あなたの今日の体調に合わせて</p>
+    <div class="menu-grid">
+      <article class="menu-card reveal">
+        <h3>アロマトリートメント</h3>
+        <p class="duration">60分 / 90分</p>
+        <p class="price">¥8,800〜</p>
+        <p>厳選したアロマオイルで全身をやさしく解きほぐします。深いリラックスを求める方に。</p>
+      </article>
+      <article class="menu-card reveal">
+        <h3>ボディケア</h3>
+        <p class="duration">60分 / 90分</p>
+        <p class="price">¥7,700〜</p>
+        <p>肩・腰・足の凝りを集中ケア。身体のコリやハリが気になる方におすすめ。</p>
+      </article>
+      <article class="menu-card reveal">
+        <h3>ヘッドスパ</h3>
+        <p class="duration">30分 / 60分</p>
+        <p class="price">¥4,400〜</p>
+        <p>頭皮と首肩の緊張を緩めます。眼精疲労・睡眠の浅さが気になる方に。</p>
+      </article>
+      <article class="menu-card reveal">
+        <h3>初回トライアル</h3>
+        <p class="duration">90分</p>
+        <p class="price">¥6,600</p>
+        <p>初めての方限定。カウンセリング込みで、ご希望に合わせた施術をお試しいただけます。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="testi" class="testimonials">
+  <div class="container">
+    <h2 class="reveal">VOICE</h2>
+    <p class="lead reveal">お越しいただいた方の声</p>
+    <div class="testi-list">
+      <div class="testi reveal">
+        慌ただしい毎日のなかで、ここに来る時間が"自分に戻る時間"になっています。
+        スタッフの方の手の温度に、毎回ほっとします。
+        <div class="who">— 30代 / Mさま</div>
+      </div>
+      <div class="testi reveal">
+        肩こりがあまりにひどくて来店しましたが、施術後の軽さに驚きました。
+        オイルの香りもお気に入りです。
+        <div class="who">— 40代 / Kさま</div>
+      </div>
+      <div class="testi reveal">
+        プライベートな空間で、まわりを気にせず眠ってしまえる安心感があります。
+        次の予約もすでに楽しみです。
+        <div class="who">— 30代 / Sさま</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="access" class="access">
+  <div class="container">
+    <h2 class="reveal">ACCESS</h2>
+    <p class="lead reveal">代々木駅 徒歩5分</p>
+    <div class="access-info reveal">
+      <div>
+        <dl>
+          <dt>住所</dt><dd>東京都渋谷区代々木1-2-3 Aoiビル2F</dd>
+          <dt>電話</dt><dd>03-XXXX-XXXX</dd>
+          <dt>営業</dt><dd>10:00 - 21:00 (定休: 木曜)</dd>
+          <dt>予約</dt><dd>完全予約制 / 当日予約可</dd>
+        </dl>
+      </div>
+      <div class="map-frame" aria-label="店舗地図"></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-section">
+  <div class="container">
+    <h2 class="reveal">RESERVATION</h2>
+    <p class="reveal">ご予約・お問い合わせはお気軽にどうぞ</p>
+    <p class="reveal" style="margin-bottom: 32px;">
+      <a href="tel:0312345678" class="btn outline" style="margin-right: 12px;">📞 03-XXXX-XXXX</a>
+      <a href="https://lin.ee/example" class="btn outline">💬 LINEで予約</a>
+    </p>
+  </div>
+</section>
+
+<footer>
+  © 2026 Relaxation Salon Aoi. All rights reserved.
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -16,6 +16,8 @@
 | 03 | [RSS→SNS投稿文生成](samples/03-rss-to-social/) | [AI情報発信自動化](https://coconala.com/services/3806351) | 22,000円 | `python pipeline.py --feed sample_feeds/tech_news.xml --mock` |
 | 04 | [複数サイト価格モニタリング](samples/04-price-monitor/) | [Python自動化](https://coconala.com/services/3766925) | 15,000円〜 | `python monitor.py --demo` |
 | 05 | [自動化相談 テンプレ集](samples/05-automation-consulting-templates/) | [自動化相談](https://coconala.com/services/3766857) | 3,300円 | Markdown閲覧のみ |
+| 06 | [Excel月次レポート自動化](samples/06-excel-monthly-report/) | [Python自動化](https://coconala.com/services/3766925) | 15,000円〜 | `python monthly_report.py` |
+| 07 | [LPテンプレート 3種](samples/07-landing-page-template/) | [Claude Code開発代行](https://coconala.com/services/4138522) | 30,000円〜 | ブラウザで `templates/*.html` を開く |
 
 ---
 

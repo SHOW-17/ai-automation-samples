@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  test-samples:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install optional deps for sample 06
+        run: pip install openpyxl beautifulsoup4
+
+      - name: Run sample 01 (CSV report)
+        working-directory: samples/01-csv-report-generator
+        run: python report.py
+
+      - name: Run sample 02 (AI article generator, mock mode)
+        working-directory: samples/02-ai-article-generator
+        run: |
+          python generate.py --keyword "テスト用キーワード" --mock --format markdown
+          python generate.py --keyword "テスト用キーワード" --mock --format html
+          python generate.py --keyword "テスト用キーワード" --mock --format json
+          python bulk_generate.py --keywords sample_keywords.csv --mock --limit 2
+
+      - name: Run sample 02 WP poster (dry-run)
+        working-directory: samples/02-ai-article-generator
+        run: python wp_post.py --markdown sample_outputs/claude-code-automation.md --dry-run
+
+      - name: Run sample 03 (RSS to social, mock mode)
+        working-directory: samples/03-rss-to-social
+        run: |
+          python pipeline.py --feed sample_feeds/tech_news.xml --mock --format html
+          python pipeline.py --feed sample_feeds/tech_news.xml --mock --format json
+
+      - name: Run sample 04 (price monitor, demo mode)
+        working-directory: samples/04-price-monitor
+        run: python monitor.py --demo --delay 0 --jitter 0
+
+      - name: Run sample 06 (Excel monthly report)
+        working-directory: samples/06-excel-monthly-report
+        run: python monthly_report.py
+
+      - name: Verify sample 07 LP templates parse
+        working-directory: samples/07-landing-page-template
+        run: |
+          python -c "
+          from html.parser import HTMLParser
+          import pathlib
+          for f in sorted(pathlib.Path('templates').glob('*.html')):
+              p = HTMLParser()
+              p.feed(f.read_text(encoding='utf-8'))
+              print(f'{f.name}: OK')
+          "

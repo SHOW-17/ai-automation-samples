@@ -38,18 +38,31 @@ class Row:
 
 def load_rows(path: Path) -> list[Row]:
     rows: list[Row] = []
-    with path.open(encoding="utf-8") as f:
+    skipped = 0
+    required = {"date", "product", "category", "quantity", "unit_price"}
+    with path.open(encoding="utf-8-sig") as f:
         reader = csv.DictReader(f)
-        for raw in reader:
-            rows.append(
-                Row(
-                    date=raw["date"].strip(),
-                    product=raw["product"].strip(),
-                    category=raw["category"].strip(),
-                    quantity=int(raw["quantity"]),
-                    unit_price=int(raw["unit_price"]),
-                )
+        if not reader.fieldnames or not required.issubset(reader.fieldnames):
+            missing = required - set(reader.fieldnames or [])
+            raise ValueError(
+                f"CSVに必要な列がありません: {sorted(missing)}. 期待: {sorted(required)}"
             )
+        for line_no, raw in enumerate(reader, start=2):
+            try:
+                rows.append(
+                    Row(
+                        date=raw["date"].strip(),
+                        product=raw["product"].strip(),
+                        category=raw["category"].strip(),
+                        quantity=int(raw["quantity"]),
+                        unit_price=int(raw["unit_price"]),
+                    )
+                )
+            except (ValueError, AttributeError, KeyError) as e:
+                skipped += 1
+                print(f"[WARN] {path.name}:{line_no} を読み飛ばし: {e}", file=__import__('sys').stderr)
+    if skipped:
+        print(f"[INFO] {skipped}行を読み飛ばしました（型不正・欠損）", file=__import__('sys').stderr)
     rows.sort(key=lambda r: r.date)
     return rows
 
@@ -325,8 +338,15 @@ def main() -> None:
         print(f"[OK] {len(rows)} 件を集計 → {out_path}")
         print(f"     期間: {kpi['first_date']} 〜 {kpi['last_date']}")
         print(f"     総売上: ¥{kpi['total_revenue']:,}")
+        print(f"     取引数: {kpi['total_count']:,} / 平均単価: ¥{kpi['avg_unit_price']:,}")
+        if agg.get("category"):
+            top_cat = agg["category"][0]
+            print(f"     主力カテゴリ: {top_cat['label']} (¥{top_cat['value']:,})")
+        if agg.get("product_top10"):
+            top_prod = agg["product_top10"][0]
+            print(f"     売れ筋: {top_prod['label']} (¥{top_prod['revenue']:,})")
     else:
-        print("[WARN] データが空です")
+        print("[WARN] 集計対象データがありません。CSVの内容をご確認ください。")
 
 
 if __name__ == "__main__":

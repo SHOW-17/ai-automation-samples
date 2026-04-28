@@ -6,15 +6,15 @@
     "x_posts": [
       {
         "variant": "casual",
-        "text": "ちょっと面白い記事見つけた👀\n\n「Claude Code 4.7リリース」って結局どこから始めるのが正解なのか、わかりやすくまとまってる。\n\nhttps://example.com/articles/claude-code-4-7-release"
+        "text": "ちょっと面白い記事見つけた👀\n「Claude Code 4.7リリース」って結局どこから始めるのが正解なのか、わかりやすくまとまってる。\nhttps://example.com/articles/claude-code-4-7-release\n#ClaudeCode"
       },
       {
         "variant": "formal",
-        "text": "【Claude Code 4.7リリース】に関する記事を読みました。\n実務で押さえておくべきポイントが体系的に整理されており、学びの多い内容でした。\n\nhttps://example.com/articles/claude-code-4-7-release"
+        "text": "【Claude Code 4.7リリース】に関する記事を読みました。実務で押さえておくべきポイントが体系的に整理されており、学びの多い内容でした。\nhttps://example.com/articles/claude-code-4-7-release\n#ClaudeCode"
       },
       {
         "variant": "question",
-        "text": "質問です。Claude Code 4.7リリースについてみなさんはどう取り組まれていますか？\n\nこちらの記事の整理が参考になりました👇\nhttps://example.com/articles/claude-code-4-7-release"
+        "text": "質問です。Claude Code 4.7リリースについてみなさんはどう取り組まれていますか？\nこちらの記事の整理が参考になりました👇\nhttps://example.com/articles/claude-code-4-7-release\n#ClaudeCode"
       }
     ],
     "threads_post": "📌 Claude Code 4.7リリース — 1Mトークン対応で何が変わるか\n\nClaude Code 4.7リリースについて、改めて整理されている良記事だった。\n\n特に印象に残ったのは「最初から完璧を目指さず、70%の完成度で動かしながら学ぶ」という考え方。この姿勢が結局いちばん効率がいいんだなと再認識。\n\n全文はこちら👇\nhttps://example.com/articles/claude-code-4-7-release",
@@ -27,15 +27,15 @@
     "x_posts": [
       {
         "variant": "casual",
-        "text": "ちょっと面白い記事見つけた👀\n\n「Pythonで始める業務自動化」って結局どこから始めるのが正解なのか、わかりやすくまとまってる。\n\nhttps://example.com/articles/python-automation-for-accounting"
+        "text": "ちょっと面白い記事見つけた👀\n「Pythonで始める業務自動化」って結局どこから始めるのが正解なのか、わかりやすくまとまってる。\nhttps://example.com/articles/python-automation-for-acco…\n#Python #AI #業務自動化"
       },
       {
         "variant": "formal",
-        "text": "【Pythonで始める業務自動化】に関する記事を読みました。\n実務で押さえておくべきポイントが体系的に整理されており、学びの多い内容でした。\n\nhttps://example.com/articles/python-automation-for-accounting"
+        "text": "【Pythonで始める業務自動化】に関する記事を読みました。実務で押さえておくべきポイントが体系的に整理されており、学びの多い内容でした。\nhttps://example.com/articles/python-automation-for…\n#Python #AI #業務自動化"
       },
       {
         "variant": "question",
-        "text": "質問です。Pythonで始める業務自動化についてみなさんはどう取り組まれていますか？\n\nこちらの記事の整理が参考になりました👇\nhttps://example.com/articles/python-automation-for-accounting"
+        "text": "質問です。Pythonで始める業務自動化についてみなさんはどう取り組まれていますか？\nこちらの記事の整理が参考になりました👇\nhttps://example.com/articles/python-automation-for-accoun…\n#Python #AI #業務自動化"
       }
     ],
     "threads_post": "📌 Pythonで始める業務自動化 — 中小企業の経理担当者向け実践ガイド\n\nPythonで始める業務自動化について、改めて整理されている良記事だった。\n\n特に印象に残ったのは「最初から完璧を目指さず、70%の完成度で動かしながら学ぶ」という考え方。この姿勢が結局いちばん効率がいいんだなと再認識。\n\n全文はこちら👇\nhttps://example.com/articles/python-automation-for-accounting",
@@ -48,15 +48,15 @@
     "x_posts": [
       {
         "variant": "casual",
-        "text": "ちょっと面白い記事見つけた👀\n\n「AIで副業」って結局どこから始めるのが正解なのか、わかりやすくまとまってる。\n\nhttps://example.com/articles/ai-side-business-3man"
+        "text": "ちょっと面白い記事見つけた👀\n「AIで副業」って結局どこから始めるのが正解なのか、わかりやすくまとまってる。\nhttps://example.com/articles/ai-side-business-3man\n#AI #副業"
       },
       {
         "variant": "formal",
-        "text": "【AIで副業】に関する記事を読みました。\n実務で押さえておくべきポイントが体系的に整理されており、学びの多い内容でした。\n\nhttps://example.com/articles/ai-side-business-3man"
+        "text": "【AIで副業】に関する記事を読みました。実務で押さえておくべきポイントが体系的に整理されており、学びの多い内容でした。\nhttps://example.com/articles/ai-side-business-3man\n#AI #副業"
       },
       {
         "variant": "question",
-        "text": "質問です。AIで副業についてみなさんはどう取り組まれていますか？\n\nこちらの記事の整理が参考になりました👇\nhttps://example.com/articles/ai-side-business-3man"
+        "text": "質問です。AIで副業についてみなさんはどう取り組まれていますか？\nこちらの記事の整理が参考になりました👇\nhttps://example.com/articles/ai-side-business-3man\n#AI #副業"
       }
     ],
     "threads_post": "📌 AIで副業 — 月3万円から始めるスモールビジネス設計術\n\nAIで副業について、改めて整理されている良記事だった。\n\n特に印象に残ったのは「最初から完璧を目指さず、70%の完成度で動かしながら学ぶ」という考え方。この姿勢が結局いちばん効率がいいんだなと再認識。\n\n全文はこちら👇\nhttps://example.com/articles/ai-side-business-3man",
@@ -69,15 +69,15 @@
     "x_posts": [
       {
         "variant": "casual",
-        "text": "ちょっと面白い記事見つけた👀\n\n「RSS活用法2026」って結局どこから始めるのが正解なのか、わかりやすくまとまってる。\n\nhttps://example.com/articles/rss-2026"
+        "text": "ちょっと面白い記事見つけた👀\n「RSS活用法2026」って結局どこから始めるのが正解なのか、わかりやすくまとまってる。\nhttps://example.com/articles/rss-2026\n#AI #RSS"
       },
       {
         "variant": "formal",
-        "text": "【RSS活用法2026】に関する記事を読みました。\n実務で押さえておくべきポイントが体系的に整理されており、学びの多い内容でした。\n\nhttps://example.com/articles/rss-2026"
+        "text": "【RSS活用法2026】に関する記事を読みました。実務で押さえておくべきポイントが体系的に整理されており、学びの多い内容でした。\nhttps://example.com/articles/rss-2026\n#AI #RSS"
       },
       {
         "variant": "question",
-        "text": "質問です。RSS活用法2026についてみなさんはどう取り組まれていますか？\n\nこちらの記事の整理が参考になりました👇\nhttps://example.com/articles/rss-2026"
+        "text": "質問です。RSS活用法2026についてみなさんはどう取り組まれていますか？\nこちらの記事の整理が参考になりました👇\nhttps://example.com/articles/rss-2026\n#AI #RSS"
       }
     ],
     "threads_post": "📌 RSS活用法2026 — 情報発信の質を上げる仕組み化のヒント\n\nRSS活用法2026について、改めて整理されている良記事だった。\n\n特に印象に残ったのは「最初から完璧を目指さず、70%の完成度で動かしながら学ぶ」という考え方。この姿勢が結局いちばん効率がいいんだなと再認識。\n\n全文はこちら👇\nhttps://example.com/articles/rss-2026",
@@ -90,15 +90,15 @@
     "x_posts": [
       {
         "variant": "casual",
-        "text": "ちょっと面白い記事見つけた👀\n\n「Webスクレイピングと法律」って結局どこから始めるのが正解なのか、わかりやすくまとまってる。\n\nhttps://example.com/articles/scraping-legal-2026"
+        "text": "ちょっと面白い記事見つけた👀\n「Webスクレイピングと法律」って結局どこから始めるのが正解なのか、わかりやすくまとまってる。\nhttps://example.com/articles/scraping-legal-2026\n#スクレイピング"
       },
       {
         "variant": "formal",
-        "text": "【Webスクレイピングと法律】に関する記事を読みました。\n実務で押さえておくべきポイントが体系的に整理されており、学びの多い内容でした。\n\nhttps://example.com/articles/scraping-legal-2026"
+        "text": "【Webスクレイピングと法律】に関する記事を読みました。実務で押さえておくべきポイントが体系的に整理されており、学びの多い内容でした。\nhttps://example.com/articles/scraping-legal-2026\n#スクレイピング"
       },
       {
         "variant": "question",
-        "text": "質問です。Webスクレイピングと法律についてみなさんはどう取り組まれていますか？\n\nこちらの記事の整理が参考になりました👇\nhttps://example.com/articles/scraping-legal-2026"
+        "text": "質問です。Webスクレイピングと法律についてみなさんはどう取り組まれていますか？\nこちらの記事の整理が参考になりました👇\nhttps://example.com/articles/scraping-legal-2026\n#スクレイピング"
       }
     ],
     "threads_post": "📌 Webスクレイピングと法律 — 2026年版の必須チェックリスト\n\nWebスクレイピングと法律について、改めて整理されている良記事だった。\n\n特に印象に残ったのは「最初から完璧を目指さず、70%の完成度で動かしながら学ぶ」という考え方。この姿勢が結局いちばん効率がいいんだなと再認識。\n\n全文はこちら👇\nhttps://example.com/articles/scraping-legal-2026",
