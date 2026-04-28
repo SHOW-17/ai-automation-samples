@@ -1,0 +1,6 @@
+name,url,css_selector,threshold_pct
+MacBook Air M4 13インチ,pages/mb-air-m4.html,.price,5
+ワイヤレスキーボード K500,pages/kb-k500.html,.price,5
+有機米5kg 新潟産,pages/rice-5kg.html,.price,5
+ノイキャンヘッドホン NX900,pages/nx-900.html,.price,5
+デスクライトLED Pro,pages/desk-light.html,.price,5

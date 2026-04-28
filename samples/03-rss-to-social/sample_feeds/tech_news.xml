@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>サンプル技術ブログ</title>
+    <link>https://example.com</link>
+    <description>サンプル用ダミーフィード</description>
+    <language>ja</language>
+
+    <item>
+      <title>Claude Code 4.7リリース — 1Mトークン対応で何が変わるか</title>
+      <link>https://example.com/articles/claude-code-4-7-release</link>
+      <description>2026年4月にリリースされたClaude Code 4.7の主要アップデートを解説。1Mトークン対応により、大規模リポジトリ全体を一度のセッションで扱えるようになった。実際の使用感とベストプラクティス。</description>
+      <pubDate>Tue, 28 Apr 2026 09:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>Pythonで始める業務自動化 — 中小企業の経理担当者向け実践ガイド</title>
+      <link>https://example.com/articles/python-automation-for-accounting</link>
+      <description>非エンジニアの経理担当者がPythonで月次集計を自動化する方法。AI支援ツールを活用すれば、プログラミング知識ゼロでも30分でスクリプトが完成する。3つの実例付き。</description>
+      <pubDate>Mon, 27 Apr 2026 18:30:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>AIで副業 — 月3万円から始めるスモールビジネス設計術</title>
+      <link>https://example.com/articles/ai-side-business-3man</link>
+      <description>2026年のAI時代における副業設計の考え方。「自分のスキル × AI」で価値を10倍にする方法。最初の3万円を稼ぐまでの具体的なロードマップを5ステップで紹介。</description>
+      <pubDate>Sun, 26 Apr 2026 21:15:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>RSS活用法2026 — 情報発信の質を上げる仕組み化のヒント</title>
+      <link>https://example.com/articles/rss-2026</link>
+      <description>SNS時代に再評価されるRSSの価値。情報源を整理し、AIで要約・配信を自動化する個人向け仕組み構築術。実装に必要なツールとコストの目安。</description>
+      <pubDate>Sat, 25 Apr 2026 14:00:00 +0900</pubDate>
+    </item>
+
+    <item>
+      <title>Webスクレイピングと法律 — 2026年版の必須チェックリスト</title>
+      <link>https://example.com/articles/scraping-legal-2026</link>
+      <description>日本のスクレイピング関連法令と利用規約の最新整理。著作権法第30条の4、不正アクセス禁止法、各社利用規約の傾向まで、実務担当者向けに体系化。</description>
+      <pubDate>Fri, 24 Apr 2026 11:45:00 +0900</pubDate>
+    </item>
+
+  </channel>
+</rss>
