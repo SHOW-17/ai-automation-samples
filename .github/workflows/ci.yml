@@ -22,8 +22,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install optional deps for sample 06
-        run: pip install openpyxl beautifulsoup4
+      - name: Install optional deps and pytest
+        run: pip install openpyxl beautifulsoup4 pytest
+
+      - name: Run unit tests
+        run: python -m pytest tests/ -v
 
       - name: Run sample 01 (CSV report)
         working-directory: samples/01-csv-report-generator
