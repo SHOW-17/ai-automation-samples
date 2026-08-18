@@ -82,4 +82,4 @@ python monthly_report.py --sheet-name "Sales"
 - Python 3.10+
 - `openpyxl` 3.1+ （`pip install openpyxl`）
 - 標準ライブラリの `argparse`, `pathlib`, `collections`
-- 100行強のメインスクリプト
+- 約350行の単一スクリプト（追加ロジックは関数追加だけで対応可能）

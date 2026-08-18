@@ -40,7 +40,7 @@ python pipeline.py --feed sample_feeds/tech_news.xml --mock --output posts.json
 
 `sample_feeds/tech_news.xml` にダミーフィード（5記事）を同梱。
 
-## 出力: JSON / Markdown / HTML
+## 出力: JSON / HTML
 
 各記事に対して、以下の構造で出力されます:
 

@@ -4,7 +4,7 @@
     python pipeline.py --feed sample_feeds/tech_news.xml --mock
     python pipeline.py --feed https://example.com/rss
 
-出力: JSON, Markdown, HTML（モバイルで確認しやすいレイアウト）
+出力: JSON, HTML（モバイルで確認しやすいレイアウト）
 """
 
 from __future__ import annotations
