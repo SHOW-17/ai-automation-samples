@@ -15,3 +15,6 @@ build/
 .ruff_cache/
 *.egg-info/
 .coverage
+
+# ローカル専用のClaude Code設定（HQへのパス参照。公開リポジトリのため内部ディレクトリ構成を晒さないよう追跡しない）
+.claude/settings.json
