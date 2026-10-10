@@ -69,3 +69,11 @@ jobs:
               p.feed(f.read_text(encoding='utf-8'))
               print(f'{f.name}: OK')
           "
+
+      - name: Verify sample 08 n8n workflow JSON has no account info or secrets
+        working-directory: samples/08-n8n-inquiry-workflow
+        run: |
+          for f in workflows/*.json; do
+            python tools/sanitize_export.py "$f" /tmp/sanitized.json
+            cmp "$f" /tmp/sanitized.json
+          done

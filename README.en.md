@@ -17,6 +17,7 @@ Author: SHOW ([show-smartwork.dev](https://show-smartwork.dev))
 | 05 | [Consulting Templates](samples/05-automation-consulting-templates/) | Consultation | ¥3,300 | Markdown only |
 | 06 | [Excel Monthly Report](samples/06-excel-monthly-report/) | Python Automation | ¥15,000+ | `python monthly_report.py` |
 | 07 | [Landing Page Templates](samples/07-landing-page-template/) | Claude Code Dev | ¥30,000+ | Open `templates/*.html` |
+| 08 | [n8n Inquiry Automation Workflow](samples/08-n8n-inquiry-workflow/) | n8n Workflow Automation (coming soon) | — | Import `workflows/*.json` into n8n, then `./send_samples.sh` |
 
 ---
 
@@ -27,6 +28,7 @@ Read each sample's README and look at the `output/` directory — generated arti
 
 ### Running locally
 Most samples work with **Python 3.10+ standard library only**. A few optional features need extras (`pip install openpyxl` for sample 06, `pip install anthropic` for real API calls in sample 02).
+Sample 08 runs inside n8n (tested on 2.42.x); see its README for import steps.
 
 ```bash
 git clone https://github.com/SHOW-17/ai-automation-samples
