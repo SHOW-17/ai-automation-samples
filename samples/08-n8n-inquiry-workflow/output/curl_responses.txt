@@ -1,0 +1,15 @@
+== sample_requests/01_estimate.json
+{"ok":true,"category":"見積り依頼","classifier":"keyword","row_id":1}
+(HTTP 200)
+== sample_requests/02_bug.json
+{"ok":true,"category":"不具合","classifier":"keyword","row_id":2}
+(HTTP 200)
+== sample_requests/03_other.json
+{"ok":true,"category":"その他","classifier":"keyword","row_id":3}
+(HTTP 200)
+== sample_requests/04_estimate_2.json
+{"ok":true,"category":"見積り依頼","classifier":"keyword","row_id":4}
+(HTTP 200)
+== sample_requests/99_invalid_missing_body.json
+{"message":"Error in workflow"}
+(HTTP 500)

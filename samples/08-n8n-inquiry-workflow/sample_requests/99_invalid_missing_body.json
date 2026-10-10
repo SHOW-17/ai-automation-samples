@@ -1,0 +1,6 @@
+{
+  "name": "エラー確認用（ダミー）",
+  "email": "error@example.com",
+  "subject": "本文が空の問い合わせ",
+  "body": ""
+}

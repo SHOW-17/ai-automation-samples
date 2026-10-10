@@ -1,0 +1,295 @@
+{
+  "name": "問い合わせ自動化（サンプル）",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "inquiry",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000001",
+      "name": "問い合わせを受信",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "5b0d6c7e-8f1a-4c2b-9d3e-000000000001"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// 必須項目（name / subject / body）が揃っているかを確かめる。\n// 足りないときはエラーにして止める → エラー用ワークフローに通知が飛ぶ。\nconst b = $json.body ?? {};\nconst missing = ['name', 'subject', 'body'].filter((k) => !String(b[k] ?? '').trim());\nif (missing.length) {\n  throw new Error(`必須項目が空です: ${missing.join(', ')}`);\n}\nreturn {\n  received_at: $now.setZone('Asia/Tokyo').toFormat('yyyy-MM-dd HH:mm:ss'),\n  name: String(b.name).trim(),\n  email: String(b.email ?? '').trim(),\n  subject: String(b.subject).trim(),\n  body: String(b.body).trim(),\n};"
+      },
+      "id": "a1000000-0000-4000-8000-000000000002",
+      "name": "入力チェック",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "modelId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "claude-haiku-5-5"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=次の問い合わせを「見積り依頼」「不具合」「その他」のどれか1つに分類し、分類名だけを答えてください。\n\n件名: {{ $json.subject }}\n本文: {{ $json.body }}",
+              "role": "user"
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 20,
+          "temperature": 0
+        }
+      },
+      "id": "a1000000-0000-4000-8000-000000000003",
+      "name": "AI分類（Anthropic）",
+      "type": "@n8n/n8n-nodes-langchain.anthropic",
+      "typeVersion": 1,
+      "position": [
+        440,
+        0
+      ],
+      "disabled": true,
+      "notes": "初期状態は無効（APIキー不要で動かすため）。納品時はお客様名義の Anthropic APIキーを認証情報に登録して有効にする。"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// 分類を決めて、表に入れる行とチャットの文面を作る。\n// - 「AI分類（Anthropic）」ノードを有効にしていれば、その答えを使う\n// - 無効（初期状態）なら、下のキーワード判定で分類する（APIキー不要）\nconst src = $('入力チェック').item.json;\nconst CATEGORIES = ['見積り依頼', '不具合', 'その他'];\n\nlet category = null;\nlet classifier = 'keyword';\nconst ai = Array.isArray($json.content) ? $json.content : null;\nif (ai) {\n  const text = ai.filter((c) => c.type === 'text').map((c) => c.text).join('').trim();\n  category = CATEGORIES.find((c) => text.includes(c)) ?? 'その他';\n  classifier = 'ai';\n} else {\n  // キーワード判定（よく変える箇所: 言葉を足す・分類を増やす）\n  const RULES = [\n    { category: '見積り依頼', words: ['見積', '料金', '費用', '価格', '予算', '発注', 'いくら'] },\n    { category: '不具合', words: ['不具合', 'エラー', '動かない', '表示されない', 'バグ', 'ログインできない', '止まる'] },\n  ];\n  const text = `${src.subject}\\n${src.body}`;\n  category = RULES.find((r) => r.words.some((w) => text.includes(w)))?.category ?? 'その他';\n}\n\nconst icon = { '見積り依頼': ':moneybag:', '不具合': ':warning:', 'その他': ':speech_balloon:' }[category];\nconst slack_text = [\n  `${icon} 新しい問い合わせ【${category}】`,\n  `件名: ${src.subject}`,\n  `差出人: ${src.name}`,\n  `本文: ${src.body.slice(0, 200)}`,\n].join('\\n');\n\nreturn { ...src, category, classifier, slack_text };"
+      },
+      "id": "a1000000-0000-4000-8000-000000000004",
+      "name": "分類",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "row",
+        "operation": "insert",
+        "dataTableId": {
+          "__rl": true,
+          "mode": "name",
+          "value": "inquiries"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "received_at": "={{ $json.received_at }}",
+            "name": "={{ $json.name }}",
+            "email": "={{ $json.email }}",
+            "subject": "={{ $json.subject }}",
+            "body": "={{ $json.body }}",
+            "category": "={{ $json.category }}",
+            "classifier": "={{ $json.classifier }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "received_at",
+              "displayName": "received_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "subject",
+              "displayName": "subject",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "body",
+              "displayName": "body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "classifier",
+              "displayName": "classifier",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000005",
+      "name": "表に記録",
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:9999/chat",
+        "sendBody": true,
+        "specifyBody": "keypair",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "={{ $('分類').item.json.slack_text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a1000000-0000-4000-8000-000000000006",
+      "name": "チャットに通知",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1100,
+        0
+      ],
+      "notes": "URL を Slack の Incoming Webhook URL に差し替えると Slack に届く（本文は Slack と同じ {\"text\": ...} 形式）。"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Webhook の呼び出し元に返す内容（curl で確認するときに見える）\nconst c = $('分類').item.json;\nreturn { ok: true, category: c.category, classifier: c.classifier, row_id: $('表に記録').item.json.id ?? null };"
+      },
+      "id": "a1000000-0000-4000-8000-000000000007",
+      "name": "受付結果を返す",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1320,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "問い合わせを受信": {
+      "main": [
+        [
+          {
+            "node": "入力チェック",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "入力チェック": {
+      "main": [
+        [
+          {
+            "node": "AI分類（Anthropic）",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI分類（Anthropic）": {
+      "main": [
+        [
+          {
+            "node": "分類",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "分類": {
+      "main": [
+        [
+          {
+            "node": "表に記録",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "表に記録": {
+      "main": [
+        [
+          {
+            "node": "チャットに通知",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "チャットに通知": {
+      "main": [
+        [
+          {
+            "node": "受付結果を返す",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "errorWorkflow": "SampleErrorNotif",
+    "timezone": "Asia/Tokyo"
+  },
+  "id": "SampleInquiryWf1"
+}

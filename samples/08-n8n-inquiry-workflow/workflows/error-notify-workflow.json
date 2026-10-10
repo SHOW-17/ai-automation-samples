@@ -1,0 +1,84 @@
+{
+  "name": "問い合わせ自動化 エラー通知（サンプル）",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "b2000000-0000-4000-8000-000000000001",
+      "name": "エラーを受け取る",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Error Trigger が受け取った情報から、チャットに送る文面を作る\nconst e = $json.execution ?? {};\nconst text = [\n  ':rotating_light: ワークフローでエラーが発生しました',\n  `ワークフロー: ${$json.workflow?.name ?? '(不明)'}`,\n  `止まったノード: ${e.lastNodeExecuted ?? e.error?.node?.name ?? '(不明)'}`,\n  `内容: ${e.error?.message ?? '(不明)'}`,\n  `実行ID: ${e.id ?? '(不明)'}`,\n  e.url ? `実行履歴: ${e.url}` : '',\n].filter(Boolean).join('\\n');\nreturn { text };"
+      },
+      "id": "b2000000-0000-4000-8000-000000000002",
+      "name": "通知文を作る",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:9999/error",
+        "sendBody": true,
+        "specifyBody": "keypair",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "={{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b2000000-0000-4000-8000-000000000003",
+      "name": "チャットに通知",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "エラーを受け取る": {
+      "main": [
+        [
+          {
+            "node": "通知文を作る",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "通知文を作る": {
+      "main": [
+        [
+          {
+            "node": "チャットに通知",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Tokyo"
+  },
+  "id": "SampleErrorNotif"
+}

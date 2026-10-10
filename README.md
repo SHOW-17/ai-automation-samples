@@ -18,6 +18,7 @@
 | 05 | [自動化相談 テンプレ集](samples/05-automation-consulting-templates/) | [自動化相談](https://coconala.com/services/3766857) | 3,300円 | Markdown閲覧のみ |
 | 06 | [Excel月次レポート自動化](samples/06-excel-monthly-report/) | [Python自動化](https://coconala.com/services/3766925) | 15,000円〜 | `python monthly_report.py` |
 | 07 | [LPテンプレート 3種](samples/07-landing-page-template/) | [Claude Code開発代行](https://coconala.com/services/4138522) | 30,000円〜 | ブラウザで `templates/*.html` を開く |
+| 08 | [n8n 問い合わせ自動化ワークフロー](samples/08-n8n-inquiry-workflow/) | n8nでSaaS・API連携を自動化（準備中） | — | n8n に `workflows/*.json` を取り込み、`./send_samples.sh` |
 
 ---
 
@@ -30,6 +31,7 @@
 ### 実際に試したい方
 ほぼすべてのサンプルが**APIキー不要のモックモード**で動きます。
 Python 3.10+ が入っていれば、追加インストールなしで動くものが多いです。
+08 は n8n（2.42 系で確認）に取り込んで動かします。手順はサンプルの README にあります。
 
 ```bash
 git clone https://github.com/SHOW-17/ai-automation-samples

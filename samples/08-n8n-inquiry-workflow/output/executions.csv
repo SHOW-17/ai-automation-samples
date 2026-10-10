@@ -1,0 +1,7 @@
+id,workflow,status,mode,startedAt
+1,問い合わせ自動化（サンプル）,success,webhook,2026-10-10T05:01:00.809Z
+2,問い合わせ自動化（サンプル）,success,webhook,2026-10-10T05:01:01.244Z
+3,問い合わせ自動化（サンプル）,success,webhook,2026-10-10T05:01:01.435Z
+4,問い合わせ自動化（サンプル）,success,webhook,2026-10-10T05:01:01.598Z
+5,問い合わせ自動化（サンプル）,error,webhook,2026-10-10T05:01:01.773Z
+6,問い合わせ自動化 エラー通知（サンプル）,success,error,2026-10-10T05:01:01.900Z
